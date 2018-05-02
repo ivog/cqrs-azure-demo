@@ -15,7 +15,7 @@ namespace Deloitte.CqrsAzureDemo
         [FunctionName("OrderPizza")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, 
-            [EventHub("outputEventHubMessage", Connection = "EventHubConnectionAppSetting")] ICollector<string> outputEvents,
+            [EventHub("deloittedemoeventhub")] ICollector<string> outputEvents,
             TraceWriter log)
         {
 
