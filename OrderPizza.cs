@@ -6,7 +6,7 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.WebJobs.Host;
 using Newtonsoft.Json;
-//using Microsoft.Azure.WebJobs.ServiceBus;
+using Microsoft.Azure.WebJobs.ServiceBus;
 
 namespace Deloitte.CqrsAzureDemo
 {
@@ -15,7 +15,7 @@ namespace Deloitte.CqrsAzureDemo
         [FunctionName("OrderPizza")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]HttpRequest req, 
-            //[EventHub("outputEventHubMessage", Connection = "EventHubConnectionAppSetting")] ICollector<string> outputEvents,
+            [EventHub("outputEventHubMessage", Connection = "EventHubConnectionAppSetting")] ICollector<string> outputEvents,
             TraceWriter log)
         {
 
@@ -32,7 +32,9 @@ namespace Deloitte.CqrsAzureDemo
             };
 
             //eventHubMessage = "hello world!";
-            //outputEvents.Add("hello world");
+            //
+            
+            outputEvents.Add("hello world");
 
             return (ActionResult)new OkObjectResult($"Thank you for your order, {order.Name}!");
         }
